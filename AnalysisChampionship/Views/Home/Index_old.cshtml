@@ -1,0 +1,390 @@
+﻿@using System.Linq;
+@model AnalysisChampionship.Models.Analise
+@if (Model.Mandante.ID > 0)
+{
+    if(!string.IsNullOrEmpty(Model.Insight))
+                {
+                    <ul>
+                        @Html.Raw(Model.Insight)
+                    </ul>
+                }
+
+    <fieldset class="border p-2">
+        <legend>Possibilidades de Resultados Sugeridos</legend>
+        <div class="row mb-2">
+            <h1 class="h3 mb-2 text-gray-800 col-md-11">Resultado Exato 60% | Dupla Chance 60% | Gols 60% | Ambas 60%</h1>
+        </div>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Confronto</th>
+                                <th>1</th>
+                                <th>X</th>
+                                <th>2</th>
+                                <th>1x</th>
+                                <th>x2</th>
+                                <th>12</th>
+                                <th>Over 1.5</th>
+                                <th>Over 2.5</th>
+                                <th>Under 2.5</th>
+                                <th>Under 3.5 </th>
+                                <th>Ambas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Mandante.Nome x @Model.Visitante.Nome</td>
+                                <td>@Decimal.Round(Model.VitoriaCasa, 2)</td>
+                                <td>@Decimal.Round(Model.Empate, 2)</td>
+                                <td>@Decimal.Round(Model.VitoriaFora, 2)</td>
+                                <td>@Decimal.Round(Model.VitoriaEmpateCasa, 2)</td>
+                                <td>@Decimal.Round(Model.VitoriaEmpateFora, 2)</td>
+                                <td>@Decimal.Round(Model.VitoriaCasaOuFora, 2)</td>
+                                <td>@Decimal.Round(Model.Over15, 2)</td>
+                                <td>@Decimal.Round(Model.Over25, 2)</td>
+                                <td>@Decimal.Round(Model.Under25, 2)</td>
+                                <td>@Decimal.Round(Model.Under35, 2)</td>
+                                <td>@Decimal.Round(Model.Ambas, 2)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend>Análise Global</legend>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Posição</th>
+                                <th>Partidas</th>
+                                <th>% Vitorias</th>
+                                <th>% Empates</th>
+                                <th>% Derrotas</th>
+                                <th>% Over 1.5</th>
+                                <th>% Over 2.5</th>
+                                <th>% Under 2.5</th>
+                                <th>% Under 3.5 </th>
+                                <th>% Ambas</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Mandante.Nome</td>
+                                <td>@Model.Mandante.Posicao</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Mandante.Global);
+                                }
+                            </tr>
+                            <tr>
+                                <td>@Model.Visitante.Nome</td>
+                                <td>@Model.Visitante.Posicao</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Visitante.Global);
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend>Análise com Mando</legend>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Partidas</th>
+                                <th>% Vitorias</th>
+                                <th>% Empates</th>
+                                <th>% Derrotas</th>
+                                <th>% Over 1.5</th>
+                                <th>% Over 2.5</th>
+                                <th>% Under 2.5</th>
+                                <th>% Under 3.5 </th>
+                                <th>% Ambas</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Mandante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Mandante.ComMando);
+                                }
+                            </tr>
+                            <tr>
+                                <td>@Model.Visitante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Visitante.ComMando);
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend>Análise Global Últimos 5 jogos</legend>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Partidas</th>
+                                <th>% Vitorias</th>
+                                <th>% Empates</th>
+                                <th>% Derrotas</th>
+                                <th>% Over 1.5</th>
+                                <th>% Over 2.5</th>
+                                <th>% Under 2.5</th>
+                                <th>% Under 3.5 </th>
+                                <th>% Ambas</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Mandante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Mandante.Ultimos5);
+                                }
+                            </tr>
+                            <tr>
+                                <td>@Model.Visitante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Visitante.Ultimos5);
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend>Análise Com Mando Últimos 5</legend>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Partidas</th>
+                                <th>% Vitorias</th>
+                                <th>% Empates</th>
+                                <th>% Derrotas</th>
+                                <th>% Over 1.5</th>
+                                <th>% Over 2.5</th>
+                                <th>% Under 2.5</th>
+                                <th>% Under 3.5 </th>
+                                <th>% Ambas</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Mandante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Mandante.Ultimos5ComMando);
+                                }
+                            </tr>
+                            <tr>
+                                <td>@Model.Visitante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Visitante.Ultimos5ComMando);
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend>Análise Global Últimos 10</legend>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Partidas</th>
+                                <th>% Vitorias</th>
+                                <th>% Empates</th>
+                                <th>% Derrotas</th>
+                                <th>% Over 1.5</th>
+                                <th>% Over 2.5</th>
+                                <th>% Under 2.5</th>
+                                <th>% Under 3.5 </th>
+                                <th>% Ambas</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Mandante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Mandante.Ultimos10);
+                                }
+                            </tr>
+                            <tr>
+                                <td>@Model.Visitante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Visitante.Ultimos10);
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend>Análise Com Mando Últimos 10</legend>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Partidas</th>
+                                <th>% Vitorias</th>
+                                <th>% Empates</th>
+                                <th>% Derrotas</th>
+                                <th>% Over 1.5</th>
+                                <th>% Over 2.5</th>
+                                <th>% Under 2.5</th>
+                                <th>% Under 3.5 </th>
+                                <th>% Ambas</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Mandante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Mandante.Ultimos10ComMando);
+                                }
+                            </tr>
+                            <tr>
+                                <td>@Model.Visitante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Visitante.Ultimos10ComMando);
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend>Análise Com Similares</legend>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Partidas</th>
+                                <th>% Vitorias</th>
+                                <th>% Empates</th>
+                                <th>% Derrotas</th>
+                                <th>% Over 1.5</th>
+                                <th>% Over 2.5</th>
+                                <th>% Under 2.5</th>
+                                <th>% Under 3.5 </th>
+                                <th>% Ambas</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Mandante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Mandante.Similares);
+                                }
+                            </tr>
+                            <tr>
+                                <td>@Model.Visitante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Visitante.Similares);
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend>Análise Com Mando Similares</legend>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Partidas</th>
+                                <th>% Vitorias</th>
+                                <th>% Empates</th>
+                                <th>% Derrotas</th>
+                                <th>% Over 1.5</th>
+                                <th>% Over 2.5</th>
+                                <th>% Under 2.5</th>
+                                <th>% Under 3.5 </th>
+                                <th>% Ambas</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.Mandante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Mandante.SimilaresComMando);
+                                }
+                            </tr>
+                            <tr>
+                                <td>@Model.Visitante.Nome</td>
+                                @{
+                                    Html.RenderPartial("_AnaliseDetalhe", Model.Visitante.SimilaresComMando);
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}

@@ -1,0 +1,6 @@
+﻿@model AnalysisChampionship.Models.AnaliseTimeDetalhe
+<td>@Model.Partidas</td>
+<td @AnalysisChampionship.Models.AnaliseTimeDetalhe.GetClassTextGols(@Model.PercentualOver15)>@Model.PercentualOver15</td>
+<td @AnalysisChampionship.Models.AnaliseTimeDetalhe.GetClassTextGols(@Model.PercentualOver25)>@Model.PercentualOver25</td>
+<td @AnalysisChampionship.Models.AnaliseTimeDetalhe.GetClassTextGols(@Model.PercentualUnder35)>@Model.PercentualUnder35</td>
+<td @AnalysisChampionship.Models.AnaliseTimeDetalhe.GetClassTextGols(@Model.PercentualAmbas)>@Model.PercentualAmbas</td>

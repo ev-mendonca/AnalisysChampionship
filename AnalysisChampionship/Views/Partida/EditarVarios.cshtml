@@ -1,0 +1,13 @@
+﻿@model AnalysisChampionship.Models.Partida
+
+@using (Html.BeginForm("SalvarVarios", "Partida", FormMethod.Post))
+{
+    <input type="hidden" name="campeonatoID" value="@Model.CampeonatoID" />
+    <div class="form-group">
+        <textarea class="form-control form-control-user" name="partidas" autofocus></textarea>
+    </div>
+    <input type="submit" class="btn btn-primary btn-user btn-block" value="Salvar" />
+}
+
+
+

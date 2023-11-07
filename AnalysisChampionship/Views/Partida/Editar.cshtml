@@ -1,0 +1,33 @@
+﻿@model AnalysisChampionship.Models.Partida
+
+@using (Html.BeginForm("Salvar", "Partida", FormMethod.Post))
+{
+    <input type="hidden" name="CampeonatoID" value="@Model.CampeonatoID" />
+    <div class="form-group">
+        <select name="TimeCasaID" autofocus>
+            @foreach (var item in ViewData["Times"] as List<AnalysisChampionship.Models.Time>)
+            {
+                <option value="@item.ID">@item.Nome</option>
+
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="text" name="GolsCasa" />
+    </div>
+    <div class="form-group">
+        <select name="TimeForaID">
+            @foreach (var item in ViewData["Times"] as List<AnalysisChampionship.Models.Time>)
+            {
+                <option value="@item.ID">@item.Nome</option>
+
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="text" name="GolsFora" />
+    </div>
+    <input type="submit" class="btn btn-primary btn-user btn-block" value="Salvar" />
+}
+
+

@@ -1,0 +1,18 @@
+﻿@model AnalysisChampionship.Models.TimeCampeonato
+
+@using (Html.BeginForm("Salvar", "TimeCampeonato", FormMethod.Post))
+{
+    <input type="hidden" name="CampeonatoID" value="@Model.CampeonatoID" />
+    <div class="form-group">
+        <select name="TimeID">
+            @foreach (var item in ViewData["Times"] as List<AnalysisChampionship.Models.Time>)
+            {
+                <option value="@item.ID">@item.Nome</option>
+
+            }
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary btn-user btn-block" value="Salvar" />
+}
+
+

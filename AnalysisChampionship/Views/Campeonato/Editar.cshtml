@@ -1,0 +1,18 @@
+﻿@model AnalysisChampionship.Models.Campeonato
+@using (Html.BeginForm("Salvar", "Campeonato", FormMethod.Post))
+{
+    <div class="form-group">
+        <input type="hidden" name="ID" value="@Model.ID" />
+        <input type="text" class="form-control form-control-user"
+               id="Nome"
+               name="Nome"
+               placeholder="Nome" value="@Model.Nome">
+    </div>
+    <div class="form-group">
+        <input type="hidden" name="Pais" value="@Model.Pais" />
+        <label>@Model.Pais</label>
+    </div>
+    <input type="submit" class="btn btn-primary btn-user btn-block" value="Salvar" />
+}
+<br />
+

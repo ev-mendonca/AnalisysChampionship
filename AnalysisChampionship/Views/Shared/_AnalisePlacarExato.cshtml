@@ -1,0 +1,49 @@
+﻿@model AnalysisChampionship.Models.AnaliseTime
+<tr>
+    <td>Global</td>
+    @{
+        Html.RenderPartial("_AnaliseDetalhePlacarExato", Model.Global);
+    }
+</tr>
+<tr>
+    <td>Com Mando</td>
+    @{
+        Html.RenderPartial("_AnaliseDetalhePlacarExato", Model.ComMando);
+    }
+</tr>
+<tr>
+    <td>Ultimos 10</td>
+    @{
+        Html.RenderPartial("_AnaliseDetalhePlacarExato", Model.Ultimos10);
+    }
+</tr>
+<tr>
+    <td>Ultimos 10 Com Mando</td>
+    @{
+        Html.RenderPartial("_AnaliseDetalhePlacarExato", Model.Ultimos10ComMando);
+    }
+</tr>
+<tr>
+    <td>Ultimos 5</td>
+    @{
+        Html.RenderPartial("_AnaliseDetalhePlacarExato", Model.Ultimos5);
+    }
+</tr>
+<tr>
+    <td>Ultimos 5 Com Mando</td>
+    @{
+        Html.RenderPartial("_AnaliseDetalhePlacarExato", Model.Ultimos5ComMando);
+    }
+</tr>
+<tr>
+    <td>Similares</td>
+    @{
+        Html.RenderPartial("_AnaliseDetalhePlacarExato", Model.Similares);
+    }
+</tr>
+<tr>
+    <td>Similares Com Mando</td>
+    @{
+        Html.RenderPartial("_AnaliseDetalhePlacarExato", Model.SimilaresComMando);
+    }
+</tr>

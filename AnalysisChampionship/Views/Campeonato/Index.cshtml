@@ -1,0 +1,54 @@
+﻿@model AnalysisChampionship.Models.Campeonatos
+@{
+    ViewData["Title"] = "Campeonatos";
+}
+<!-- Page Heading -->
+<div class="row mb-2">
+    <h1 class="h3 mb-2 text-gray-800 col-md-11">Campeonatos</h1>
+    <a href="/Campeonato/Editar" class="btn btn-primary btn-icon-split">
+        <span class="text">Novo</span>
+    </a>
+</div>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var campeonato in Model.CampeonatoList)
+                    {
+                        <tr>
+                            <td>@campeonato.ID</td>
+                            <td>@campeonato.Nome</td>
+                            <td>@(campeonato.Active ? "Ativo" : "Inativo")</td>
+                            <td>
+                                <a href="/Campeonato/Participantes/@campeonato.ID" class="btn btn-primary btn-icon-split">
+                                    <span class="text">Participantes</span>
+                                </a>
+                                <a href="/Campeonato/Partidas/@campeonato.ID" class="btn btn-primary btn-icon-split">
+                                    <span class="text">Partidas</span>
+                                </a>
+                                <a href="/Campeonato/Classificacao/@campeonato.ID" class="btn btn-primary btn-icon-split">
+                                    <span class="text">Classificacao</span>
+                                </a>
+                                <a href="/Campeonato/Analise/@campeonato.ID" class="btn btn-primary btn-icon-split">
+                                    <span class="text">Análise</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

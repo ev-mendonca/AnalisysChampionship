@@ -1,0 +1,41 @@
+﻿@model AnalysisChampionship.Models.Times
+@{
+    ViewData["Title"] = "Times";
+}
+<!-- Page Heading -->
+<div class="row mb-2">
+    <h1 class="h3 mb-2 text-gray-800 col-md-11">Times</h1>
+    <a href="/Time/Editar" class="btn btn-primary btn-icon-split">
+        <span class="text">Novo</span>
+    </a>
+</div>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var time in Model.TimeList)
+                    {
+                        <tr>
+                            <td>@time.ID</td>
+                            <td>@time.Nome</td>
+                            <td>
+                                <a href="/Time/Excluir/@time.ID" class="btn btn-primary btn-icon-split">
+                                    <span class="text">Excluir</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model AnalysisChampionship.Models.Campeonato
+@if (Model.ID > 0)
+{
+    <fieldset class="border p-2">
+        <div class="row mb-2">
+            <h1 class="h3 mb-2 text-gray-800 col-md-11">Participantes</h1>
+            <a href="/TimeCampeonato/Editar/@Model.ID" class="btn btn-primary btn-icon-split">
+                <span class="text">Novo</span>
+            </a>
+        </div>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var time in Model.Participantes)
+                            {
+                                <tr>
+                                    <td>@time.Nome</td>
+                                    <td>
+                                        <a href="/TimeCampeonato/Excluir?timeid=@time.ID&campeonatoID=@Model.ID" class="btn btn-primary btn-icon-split">
+                                            <span class="text">Excluir</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}

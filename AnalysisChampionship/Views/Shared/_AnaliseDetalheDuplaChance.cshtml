@@ -1,0 +1,5 @@
+﻿@model AnalysisChampionship.Models.AnaliseTimeDetalhe
+<td>@Model.Partidas</td>
+<td @AnalysisChampionship.Models.AnaliseTimeDetalhe.GetClassTextDuplaChance(@Model.PercentualVitoriaEmpate)>@Model.PercentualVitoriaEmpate</td>
+<td @AnalysisChampionship.Models.AnaliseTimeDetalhe.GetClassTextDuplaChance(@Model.PercentualDerrotaEmpate)>@Model.PercentualDerrotaEmpate</td>
+<td @AnalysisChampionship.Models.AnaliseTimeDetalhe.GetClassTextDuplaChance(@Model.PercentualVitoriaOuDerrota)>@Model.PercentualVitoriaOuDerrota</td>
