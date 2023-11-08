@@ -34,4 +34,19 @@ namespace AnalysisChampionship.Models
         Under35,
         Ambas
     }
+
+    public enum enumTipoAnalise    
+    {
+        Global,
+        ComMando,
+        Ultimo10,
+        Ultimos5ComMando,
+        Similares,
+        SimilaresComMando,
+    }
+    public enum enumTipoEquipe
+    {
+        Mandante,
+        Visitante
+    }
 }

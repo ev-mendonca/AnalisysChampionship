@@ -176,5 +176,113 @@ namespace AnalysisChampionship.Models
 
         public string Insight { get; set; }
 
+        public string GetTextoResultadoExato(enumTipoAnalise tipoAnalise)
+        {
+            switch (tipoAnalise)
+            {
+                case enumTipoAnalise.Global:
+                    return $"Global: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.Global)}  e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.Global)}";
+                case enumTipoAnalise.ComMando:
+                    return $"Com mando: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.ComMando)} e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.ComMando)}";
+                case enumTipoAnalise.Ultimo10:
+                    return $"Últimos 10 jogos: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.Ultimos10)} e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.Ultimos10)}";
+                case enumTipoAnalise.Ultimos5ComMando:
+                    return $"Últimos 5 jogos com mando: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.Ultimos5ComMando)} e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.Ultimos5ComMando)}";
+                case enumTipoAnalise.Similares:
+                    return $"Similares: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.Similares)} e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.Similares)}";
+                case enumTipoAnalise.SimilaresComMando:
+                    return $"Similares com mando: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.SimilaresComMando)}  e  {Visitante.Nome}  -  {GetTextoResultadoExato(Visitante.SimilaresComMando)}";
+                default:
+                    return "";
+            }
+        }
+
+        public string GetTextoGols(enumTipoAnalise tipoAnalise)
+        {
+            switch (tipoAnalise)
+            {
+                case enumTipoAnalise.Global:
+                    return $"Global: {Mandante.Nome} - {GetTextoGols(Mandante.Global)}  e {Visitante.Nome} - {GetTextoGols(Visitante.Global)}";
+                case enumTipoAnalise.ComMando:
+                    return $"Com mando: {Mandante.Nome} - {GetTextoGols(Mandante.ComMando)} e {Visitante.Nome} - {GetTextoGols(Visitante.ComMando)}";
+                case enumTipoAnalise.Ultimo10:
+                    return $"Últimos 10 jogos: {Mandante.Nome} - {GetTextoGols(Mandante.Ultimos10)} e {Visitante.Nome} - {GetTextoGols(Visitante.Ultimos10)}";
+                case enumTipoAnalise.Ultimos5ComMando:
+                    return $"Últimos 5 jogos com mando: {Mandante.Nome} - {GetTextoGols(Mandante.Ultimos5ComMando)} e {Visitante.Nome} - {GetTextoGols(Visitante.Ultimos5ComMando)}";
+                case enumTipoAnalise.Similares:
+                    return $"Similares: {Mandante.Nome} - {GetTextoGols(Mandante.Similares)} e {Visitante.Nome} - {GetTextoGols(Visitante.Similares)}";
+                case enumTipoAnalise.SimilaresComMando:
+                    return $"Similares com mando: {Mandante.Nome} - {GetTextoGols(Mandante.SimilaresComMando)}  e  {Visitante.Nome}  -  {GetTextoGols(Visitante.SimilaresComMando)}";
+                default:
+                    return "";
+            }
+        }
+
+        public string GetTextoAmbas(enumTipoAnalise tipoAnalise)
+        {
+            switch (tipoAnalise)
+            {
+                case enumTipoAnalise.Global:
+                    return $"Global: {Mandante.Nome} - {GetTextoAmbas(Mandante.Global)}  e {Visitante.Nome} - {GetTextoAmbas(Visitante.Global)}";
+                case enumTipoAnalise.ComMando:
+                    return $"Com mando: {Mandante.Nome} - {GetTextoAmbas(Mandante.ComMando)} e {Visitante.Nome} - {GetTextoAmbas(Visitante.ComMando)}";
+                case enumTipoAnalise.Ultimo10:
+                    return $"Últimos 10 jogos: {Mandante.Nome} - {GetTextoAmbas(Mandante.Ultimos10)} e {Visitante.Nome} - {GetTextoAmbas(Visitante.Ultimos10)}";
+                case enumTipoAnalise.Ultimos5ComMando:
+                    return $"Últimos 5 jogos com mando: {Mandante.Nome} - {GetTextoAmbas(Mandante.Ultimos5ComMando)} e {Visitante.Nome} - {GetTextoAmbas(Visitante.Ultimos5ComMando)}";
+                case enumTipoAnalise.Similares:
+                    return $"Similares: {Mandante.Nome} - {GetTextoAmbas(Mandante.Similares)} e {Visitante.Nome} - {GetTextoAmbas(Visitante.Similares)}";
+                case enumTipoAnalise.SimilaresComMando:
+                    return $"Similares com mando: {Mandante.Nome} - {GetTextoAmbas(Mandante.SimilaresComMando)}  e  {Visitante.Nome}  -  {GetTextoAmbas(Visitante.SimilaresComMando)}";
+                default:
+                    return "";
+            }
+        }
+
+        private string GetTextoResultadoExato(AnaliseTimeDetalhe detalhe)
+        {
+            if (detalhe.Partidas == 0)
+                return "N/A";
+
+            if (detalhe.PercentualVitoria > detalhe.PercentualEmpate && detalhe.PercentualVitoria > detalhe.PercentualDerrota)
+                return $"Vitória";
+
+            if (detalhe.PercentualEmpate > detalhe.PercentualVitoria && detalhe.PercentualEmpate > detalhe.PercentualDerrota)
+                return $"Empates";
+
+            if (detalhe.PercentualDerrota > detalhe.PercentualVitoria && detalhe.PercentualDerrota > detalhe.PercentualEmpate)
+                return $"Derrotas";
+            
+            return $"Neutro";
+        }
+
+        private string GetTextoGols(AnaliseTimeDetalhe detalhe)
+        {
+            if (detalhe.Partidas == 0)
+                return "N/A";
+
+            if (detalhe.PercentualOver25 > detalhe.PercentualUnder25)
+                return $"Over";
+
+            if (detalhe.PercentualUnder25 > detalhe.PercentualOver25)
+                return $"Under";
+
+            return $"Neutro";
+        }
+
+        private string GetTextoAmbas(AnaliseTimeDetalhe detalhe)
+        {
+            if (detalhe.Partidas == 0)
+                return "N/A";
+
+            if (detalhe.PercentualAmbas > 50)
+                return $"Ambas marcam";
+
+            if (detalhe.PercentualAmbas < 50)
+                return $"Ambas não marcam";
+
+            return $"Neutro";
+        }
+
     }
 }

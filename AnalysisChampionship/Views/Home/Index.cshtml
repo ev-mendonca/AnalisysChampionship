@@ -4,42 +4,33 @@
 {
     <h1>@Model.Mandante.Nome x @Model.Visitante.Nome</h1>
 
-    if (@Model.PercentualVitoriaCasa > 70)
-    {
-        <h1>Vitória Casa</h1>
-    }
-    else if (@Model.PercentualEmpate > 70)
-    {
-        <h1>Empate</h1>
-    }
-    else if (@Model.PercentualVitoriaFora > 70)
-    {
-        <h1>Vitória Fora</h1>
-    }
-    else if (@Model.PercentualVitoriaEmpateCasa > 70)
-    {
-        <h1>Vitoria ou Empate Casa</h1>
-    }
-    else if (@Model.PercentualVitoriaEmpateFora > 70)
-    {
-        <h1>Vitória ou Empate Fora</h1>
-    }
-    else if (@Model.PercentualVitoriaCasaFora > 70)
-    {
-        <h1>Vitória Casa ou Fora</h1>
-    }
+    <fieldset class="border p-2">
+        <legend>Placar Exato</legend>
+        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Global)</p>
+        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.ComMando)</p>
+        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10)</p>
+        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando)</p>
+        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Similares)</p>
+        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.SimilaresComMando)</p>
+    </fieldset>
 
-    if (@Model.PercentualOver15 > 70 && @Model.PercentualOver25 > 50)
-    {
-        <h1>Mais de 2.5 Gols</h1>
-    }
+    <fieldset class="border p-2">
+        <legend>Over/Under 2.5</legend>
+        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Global)</p>
+        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.ComMando)</p>
+        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10)</p>
+        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando)</p>
+        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Similares)</p>
+        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.SimilaresComMando)</p>
+    </fieldset>
 
-    if (@Model.PercentualUnder35 > 70 && @Model.PercentualUnder25 > 50)
-    {
-        <h1>Menos de 2.5 Gols</h1>
-    }
-    if (@Model.PercentualAmbas > 70)
-    {
-        <h1>Ambas Marcam</h1>
-    }
+    <fieldset class="border p-2">
+        <legend>Ambas</legend>
+        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Global)</p>
+        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.ComMando)</p>
+        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10)</p>
+        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando)</p>
+        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Similares)</p>
+        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.SimilaresComMando)</p>
+    </fieldset>
 }
