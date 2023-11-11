@@ -6,31 +6,31 @@
 
     <fieldset class="border p-2">
         <legend>Placar Exato</legend>
-        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Global)</p>
-        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.ComMando)</p>
-        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10)</p>
-        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando)</p>
-        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Similares)</p>
-        <p>@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.SimilaresComMando)</p>
+        @Html.Raw(Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Global))
+        @Html.Raw(@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.ComMando))
+        @Html.Raw(@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10))
+        @Html.Raw(@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando))
+        @Html.Raw(@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.Similares))
+        @Html.Raw(@Model.GetTextoResultadoExato(AnalysisChampionship.Models.enumTipoAnalise.SimilaresComMando))
     </fieldset>
 
     <fieldset class="border p-2">
         <legend>Over/Under 2.5</legend>
-        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Global)</p>
-        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.ComMando)</p>
-        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10)</p>
-        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando)</p>
-        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Similares)</p>
-        <p>@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.SimilaresComMando)</p>
+        @Html.Raw(@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Global))
+        @Html.Raw(@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.ComMando))
+        @Html.Raw(@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10))
+        @Html.Raw(@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando))
+        @Html.Raw(@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.Similares))
+        @Html.Raw(@Model.GetTextoGols(AnalysisChampionship.Models.enumTipoAnalise.SimilaresComMando))
     </fieldset>
 
     <fieldset class="border p-2">
         <legend>Ambas</legend>
-        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Global)</p>
-        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.ComMando)</p>
-        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10)</p>
-        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando)</p>
-        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Similares)</p>
-        <p>@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.SimilaresComMando)</p>
+        @Html.Raw(@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Global))
+        @Html.Raw(@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.ComMando))
+        @Html.Raw(@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10))
+        @Html.Raw(@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando))
+        @Html.Raw(@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.Similares))
+        @Html.Raw(@Model.GetTextoAmbas(AnalysisChampionship.Models.enumTipoAnalise.SimilaresComMando))
     </fieldset>
 }

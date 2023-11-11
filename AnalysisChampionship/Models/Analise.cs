@@ -45,7 +45,7 @@ namespace AnalysisChampionship.Models
 
                 case enumTipoCalculo.Empate:
                     typeMandante = typeVisitante = enumTipoResultado.Empate;
-                break;
+                    break;
 
                 case enumTipoCalculo.VitoriaEmpateCasa:
                     typeMandante = enumTipoResultado.VitoriaEmpate;
@@ -178,110 +178,152 @@ namespace AnalysisChampionship.Models
 
         public string GetTextoResultadoExato(enumTipoAnalise tipoAnalise)
         {
+            bool isGreen = false;
+            string paragrafo = "";
+            
             switch (tipoAnalise)
             {
                 case enumTipoAnalise.Global:
-                    return $"Global: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.Global)}  e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.Global)}";
+                    paragrafo = $"Global: {GetTextoResultadoExato(Mandante.Global, Visitante.Global, out isGreen)}";
+                    break;
                 case enumTipoAnalise.ComMando:
-                    return $"Com mando: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.ComMando)} e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.ComMando)}";
+                    paragrafo = $"Com mando: {GetTextoResultadoExato(Mandante.ComMando, Visitante.ComMando, out isGreen)}";
+                    break;
                 case enumTipoAnalise.Ultimo10:
-                    return $"Últimos 10 jogos: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.Ultimos10)} e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.Ultimos10)}";
+                    paragrafo = $"Últimos 10 jogos: {GetTextoResultadoExato(Mandante.Ultimos10, Visitante.Ultimos10, out isGreen)}";
+                    break;
                 case enumTipoAnalise.Ultimos5ComMando:
-                    return $"Últimos 5 jogos com mando: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.Ultimos5ComMando)} e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.Ultimos5ComMando)}";
+                    paragrafo = $"Últimos 5 jogos com mando: {GetTextoResultadoExato(Mandante.Ultimos5ComMando, Visitante.Ultimos5ComMando, out isGreen)}";
+                    break;
                 case enumTipoAnalise.Similares:
-                    return $"Similares: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.Similares)} e {Visitante.Nome} - {GetTextoResultadoExato(Visitante.Similares)}";
+                    paragrafo = $"Similares: {GetTextoResultadoExato(Mandante.Similares, Visitante.Similares, out isGreen)}";
+                    break;
                 case enumTipoAnalise.SimilaresComMando:
-                    return $"Similares com mando: {Mandante.Nome} - {GetTextoResultadoExato(Mandante.SimilaresComMando)}  e  {Visitante.Nome}  -  {GetTextoResultadoExato(Visitante.SimilaresComMando)}";
+                    paragrafo = $"Similares com mando: {GetTextoResultadoExato(Mandante.SimilaresComMando, Visitante.SimilaresComMando, out isGreen)}";
+                    break;
                 default:
-                    return "";
+                    paragrafo = "";
+                    break;
             }
+
+            return $"<p {(isGreen ? "class='text-green'" : "")}>{paragrafo}</p>";
         }
 
         public string GetTextoGols(enumTipoAnalise tipoAnalise)
         {
+            bool isGreen = false;
+            string paragrafo = "";
+
             switch (tipoAnalise)
             {
                 case enumTipoAnalise.Global:
-                    return $"Global: {Mandante.Nome} - {GetTextoGols(Mandante.Global)}  e {Visitante.Nome} - {GetTextoGols(Visitante.Global)}";
+                    paragrafo =  $"Global: {GetTextoGols(Mandante.Global, Visitante.Global, out isGreen)}";
+                    break;
                 case enumTipoAnalise.ComMando:
-                    return $"Com mando: {Mandante.Nome} - {GetTextoGols(Mandante.ComMando)} e {Visitante.Nome} - {GetTextoGols(Visitante.ComMando)}";
+                    paragrafo = $"Com mando: {GetTextoGols(Mandante.ComMando, Visitante.ComMando, out isGreen)}";
+                    break;
                 case enumTipoAnalise.Ultimo10:
-                    return $"Últimos 10 jogos: {Mandante.Nome} - {GetTextoGols(Mandante.Ultimos10)} e {Visitante.Nome} - {GetTextoGols(Visitante.Ultimos10)}";
+                    paragrafo = $"Últimos 10 jogos: {GetTextoGols(Mandante.Ultimos10, Visitante.Ultimos10, out isGreen)}";
+                    break;
                 case enumTipoAnalise.Ultimos5ComMando:
-                    return $"Últimos 5 jogos com mando: {Mandante.Nome} - {GetTextoGols(Mandante.Ultimos5ComMando)} e {Visitante.Nome} - {GetTextoGols(Visitante.Ultimos5ComMando)}";
+                    paragrafo = $"Últimos 5 jogos com mando: {GetTextoGols(Mandante.Ultimos5ComMando, Visitante.Ultimos5ComMando, out isGreen)}";
+                    break;
                 case enumTipoAnalise.Similares:
-                    return $"Similares: {Mandante.Nome} - {GetTextoGols(Mandante.Similares)} e {Visitante.Nome} - {GetTextoGols(Visitante.Similares)}";
+                    paragrafo = $"Similares: {GetTextoGols(Mandante.Similares, Visitante.Similares, out isGreen)}";
+                    break;
                 case enumTipoAnalise.SimilaresComMando:
-                    return $"Similares com mando: {Mandante.Nome} - {GetTextoGols(Mandante.SimilaresComMando)}  e  {Visitante.Nome}  -  {GetTextoGols(Visitante.SimilaresComMando)}";
+                    paragrafo = $"Similares com mando: {GetTextoGols(Mandante.SimilaresComMando, Visitante.SimilaresComMando, out isGreen)}";
+                    break;
                 default:
-                    return "";
+                    paragrafo = "";
+                    break;
             }
+            return $"<p {(isGreen ? "class='text-green'" : "")}>{paragrafo}</p>";
         }
 
         public string GetTextoAmbas(enumTipoAnalise tipoAnalise)
         {
+            bool isGreen = false;
+            string paragrafo = "";
+
             switch (tipoAnalise)
             {
                 case enumTipoAnalise.Global:
-                    return $"Global: {Mandante.Nome} - {GetTextoAmbas(Mandante.Global)}  e {Visitante.Nome} - {GetTextoAmbas(Visitante.Global)}";
+                    paragrafo = $"Global: {GetTextoAmbas(Mandante.Global, Visitante.Global, out isGreen)}";
+                    break;
                 case enumTipoAnalise.ComMando:
-                    return $"Com mando: {Mandante.Nome} - {GetTextoAmbas(Mandante.ComMando)} e {Visitante.Nome} - {GetTextoAmbas(Visitante.ComMando)}";
+                    paragrafo = $"Com mando: {GetTextoAmbas(Mandante.ComMando, Visitante.ComMando, out isGreen)}";
+                    break;
                 case enumTipoAnalise.Ultimo10:
-                    return $"Últimos 10 jogos: {Mandante.Nome} - {GetTextoAmbas(Mandante.Ultimos10)} e {Visitante.Nome} - {GetTextoAmbas(Visitante.Ultimos10)}";
+                    paragrafo = $"Últimos 10 jogos: {GetTextoAmbas(Mandante.Ultimos10, Visitante.Ultimos10, out isGreen)}";
+                    break;
                 case enumTipoAnalise.Ultimos5ComMando:
-                    return $"Últimos 5 jogos com mando: {Mandante.Nome} - {GetTextoAmbas(Mandante.Ultimos5ComMando)} e {Visitante.Nome} - {GetTextoAmbas(Visitante.Ultimos5ComMando)}";
+                    paragrafo = $"Últimos 5 jogos com mando: {GetTextoAmbas(Mandante.Ultimos5ComMando, Visitante.Ultimos5ComMando, out isGreen)}";
+                    break;
                 case enumTipoAnalise.Similares:
-                    return $"Similares: {Mandante.Nome} - {GetTextoAmbas(Mandante.Similares)} e {Visitante.Nome} - {GetTextoAmbas(Visitante.Similares)}";
+                    paragrafo = $"Similares: {GetTextoAmbas(Mandante.Similares, Visitante.Similares, out isGreen)}";
+                    break;
                 case enumTipoAnalise.SimilaresComMando:
-                    return $"Similares com mando: {Mandante.Nome} - {GetTextoAmbas(Mandante.SimilaresComMando)}  e  {Visitante.Nome}  -  {GetTextoAmbas(Visitante.SimilaresComMando)}";
+                    paragrafo = $"Similares com mando: {GetTextoAmbas(Mandante.SimilaresComMando, Visitante.SimilaresComMando, out isGreen)}";
+                    break;
                 default:
-                    return "";
+                    paragrafo = "";
+                    break;
             }
+            return $"<p {(isGreen ? "class='text-green'" : "")}>{paragrafo}</p>";
         }
 
-        private string GetTextoResultadoExato(AnaliseTimeDetalhe detalhe)
+        private string GetTextoResultadoExato(AnaliseTimeDetalhe mandante, AnaliseTimeDetalhe visitante, out bool isGreen)
         {
-            if (detalhe.Partidas == 0)
+            isGreen = false;
+            if (mandante.Partidas == 0 || visitante.Partidas == 0)
                 return "N/A";
 
-            if (detalhe.PercentualVitoria > detalhe.PercentualEmpate && detalhe.PercentualVitoria > detalhe.PercentualDerrota)
-                return $"Vitória";
+            decimal vitoriaCasa = (mandante.PercentualVitoria + visitante.PercentualDerrota) / 2;
+            decimal empate = (mandante.PercentualEmpate + visitante.PercentualEmpate) / 2;
+            decimal vitoriaFora = (mandante.PercentualDerrota + visitante.PercentualVitoria) / 2;
 
-            if (detalhe.PercentualEmpate > detalhe.PercentualVitoria && detalhe.PercentualEmpate > detalhe.PercentualDerrota)
-                return $"Empates";
+            if (vitoriaCasa >= 50 || empate >= 50 || vitoriaFora >= 50)
+                isGreen = true;
 
-            if (detalhe.PercentualDerrota > detalhe.PercentualVitoria && detalhe.PercentualDerrota > detalhe.PercentualEmpate)
-                return $"Derrotas";
-            
+            return $"A média final de vitória do {Mandante.Nome} é de {vitoriaCasa}%. Para empate a média é de {empate}% enquanto a média de vitórias para {Visitante.Nome} é de {vitoriaFora}%";
+        }
+
+        private string GetTextoGols(AnaliseTimeDetalhe mandante, AnaliseTimeDetalhe visitante, out bool isGreen)
+        {
+            isGreen = false;
+
+            if (mandante.Partidas == 0 || visitante.Partidas == 0)
+                return "N/A";
+
+            decimal mediaOver = (mandante.PercentualOver25 + visitante.PercentualOver25) / 2;
+            decimal mediaUnder = (mandante.PercentualUnder25 + visitante.PercentualUnder25) / 2;
+
+            if (mediaOver >= 70 || mediaUnder >= 70)
+                isGreen = true;
+
+            if (mediaOver > mediaUnder)
+                return $"Over {mediaOver}%";
+
+            if (mediaUnder > mediaOver)
+                return $"Under {mediaUnder}%";
+
             return $"Neutro";
         }
 
-        private string GetTextoGols(AnaliseTimeDetalhe detalhe)
+        private string GetTextoAmbas(AnaliseTimeDetalhe mandante, AnaliseTimeDetalhe visitante, out bool isGreen)
         {
-            if (detalhe.Partidas == 0)
+            isGreen = false;
+            if (mandante.Partidas == 0 || visitante.Partidas == 0)
                 return "N/A";
 
-            if (detalhe.PercentualOver25 > detalhe.PercentualUnder25)
-                return $"Over";
+            decimal mediaAmbas = (mandante.PercentualAmbas + visitante.PercentualAmbas) / 2;
+            if (mediaAmbas > 60)
+                isGreen = true;
 
-            if (detalhe.PercentualUnder25 > detalhe.PercentualOver25)
-                return $"Under";
+            return $"Ambas marcam {mediaAmbas}%";
 
-            return $"Neutro";
-        }
 
-        private string GetTextoAmbas(AnaliseTimeDetalhe detalhe)
-        {
-            if (detalhe.Partidas == 0)
-                return "N/A";
-
-            if (detalhe.PercentualAmbas > 50)
-                return $"Ambas marcam";
-
-            if (detalhe.PercentualAmbas < 50)
-                return $"Ambas não marcam";
-
-            return $"Neutro";
         }
 
     }
