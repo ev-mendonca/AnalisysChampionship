@@ -1,0 +1,130 @@
+﻿@model AnalysisChampionship.Models.AnaliseNBA
+@if (Model.Mandante.ID > 0)
+{
+    <h1>@Model.Mandante.Nome x @Model.Visitante.Nome</h1>
+
+    <fieldset class="border p-2">
+        <legend>Totais</legend>
+        @Html.Raw(@Model.GetTexto(AnalysisChampionship.Models.enumTipoAnalise.Global))
+        @Html.Raw(@Model.GetTexto(AnalysisChampionship.Models.enumTipoAnalise.ComMando))
+        @Html.Raw(@Model.GetTexto(AnalysisChampionship.Models.enumTipoAnalise.Ultimo10))
+        @Html.Raw(@Model.GetTexto(AnalysisChampionship.Models.enumTipoAnalise.Ultimos5ComMando))
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend>Cálculos</legend>
+        <input type="hidden" id="pts-casa" value="@Model.Mandante.Global.MediaPontos" />
+        <input type="hidden" id="reb-casa" value="@Model.Mandante.Global.MediaRebotes" />
+        <input type="hidden" id="ass-casa" value="@Model.Mandante.Global.MediaAssistencias" />
+        <input type="hidden" id="pts-fora" value="@Model.Visitante.Global.MediaPontos" />
+        <input type="hidden" id="reb-fora" value="@Model.Visitante.Global.MediaRebotes" />
+        <input type="hidden" id="ass-fora" value="@Model.Visitante.Global.MediaAssistencias" />
+
+        <input type="hidden" id="md-pts-casa" value="@Model.MediaFinalPontosMandante()" />
+        <input type="hidden" id="md-pts-fora" value="@Model.MediaFinalPontosVisitante()" />
+        <input type="hidden" id="md-reb-casa" value="@Model.MediaFinalRebotesMandante()" />
+        <input type="hidden" id="md-reb-fora" value="@Model.MediaFinalRebotesVisitante()" />
+        <input type="hidden" id="md-ass-casa" value="@Model.MediaFinalAssitenciasMandante()" />
+        <input type="hidden" id="md-ass-fora" value="@Model.MediaFinalAssistenciasVisitante()" />
+
+
+        <input type="text" id="pontuacao-casa" placeholder="Pontos" />
+        <button id="btn-pontos" onclick="CalculoPontuacaoMandante();">Calcular</button>
+        <input type="text" id="rebote-casa" placeholder="Rebotes" />
+        <button id="btn-rebotes" onclick="CalculoReboteMandante();">Calcular</button>
+        <input type="text" id="assistencia-casa" placeholder="Assistencias" />
+        <button id="btn-assistecias" onclick="CalculoAssistenciaMandante();">Calcular</button>
+        <br />
+        <input type="text" id="pontuacao-fora" placeholder="Pontos" />
+        <button id="btn-pontos" onclick="CalculoPontuacaoVisitante();">Calcular</button>
+        <input type="text" id="rebote-fora" placeholder="Rebotes" />
+        <button id="btn-rebotes" onclick="CalculoReboteVisitante();">Calcular</button>
+        <input type="text" id="assistencia-fora" placeholder="Assistencias" />
+        <button id="btn-assistecias" onclick="CalculoAssistenciaVisitante();">Calcular</button>
+    </fieldset>
+
+    foreach (var jogador in Model.Jogadores)
+    {
+        <fieldset class="border p-2">
+            <legend>@jogador.Nome</legend>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Pontos</th>
+                        <th>Rebotes</th>
+                        <th>Assistencias</th>
+                        <th>De 3</th>
+                        <th>Roubos</th>
+                        <th>Tocos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Médias</td>
+                        <td>@jogador.MediaPontos</td>
+                        <td>@jogador.MediaRebotes</td>
+                        <td>@jogador.MediaAssistencia</td>
+                        <td>@jogador.MediaTres</td>
+                        <td>@jogador.MediaRoubo</td>
+                        <td>@jogador.MediaToco</td>
+                    </tr>
+                    <tr>
+                        <td>Sugestões</td>
+                        @Html.Raw(jogador.GetSugestao())
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    }
+}
+
+<script>
+    function CalculoPontuacaoMandante() {
+        var pts_casa = parseInt(document.getElementById('pts-casa').value);
+        var md_pts_casa = parseInt(document.getElementById('md-pts-casa').value);
+        var pontosJogador = parseInt(document.getElementById('pontuacao-casa').value);
+        var contribuicao = pontosJogador / pts_casa;
+        var final = parseInt(md_pts_casa * contribuicao);
+        alert(final);
+    }
+    function CalculoPontuacaoVisitante() {
+        var pts_casa = parseInt(document.getElementById('pts-fora').value);
+        var md_pts_casa = parseInt(document.getElementById('md-pts-fora').value);
+        var pontosJogador = parseInt(document.getElementById('pontuacao-fora').value);
+        var contribuicao = pontosJogador / pts_casa;
+        var final = parseInt(md_pts_casa * contribuicao);
+        alert(final);
+    }
+    function CalculoReboteMandante() {
+        var pts_casa = parseInt(document.getElementById('reb-casa').value);
+        var md_pts_casa = parseInt(document.getElementById('md-reb-casa').value);
+        var pontosJogador = parseInt(document.getElementById('rebote-casa').value);
+        var contribuicao = pontosJogador / pts_casa;
+        var final = parseInt(md_pts_casa * contribuicao);
+        alert(final);
+    }
+    function CalculoReboteVisitante() {
+        var pts_casa = parseInt(document.getElementById('reb-fora').value);
+        var md_pts_casa = parseInt(document.getElementById('md-reb-fora').value);
+        var pontosJogador = parseInt(document.getElementById('rebote-fora').value);
+        var contribuicao = pontosJogador / pts_casa;
+        var final = parseInt(md_pts_casa * contribuicao);
+        alert(final);
+    }
+    function CalculoAssistenciaMandante() {
+        var pts_casa = parseInt(document.getElementById('ass-casa').value);
+        var md_pts_casa = parseInt(document.getElementById('md-ass-casa').value);
+        var pontosJogador = parseInt(document.getElementById('assistencia-casa').value);
+        var contribuicao = pontosJogador / pts_casa;
+        var final = parseInt(md_pts_casa * contribuicao);
+        alert(final);
+    }
+    function CalculoAssistenciaVisitante() {
+        var pts_casa = parseInt(document.getElementById('ass-fora').value);
+        var md_pts_casa = parseInt(document.getElementById('md-ass-fora').value);
+        var pontosJogador = parseInt(document.getElementById('assistencia-fora').value);
+        var contribuicao = pontosJogador / pts_casa;
+        var final = parseInt(md_pts_casa * contribuicao);
+        alert(final);
+    }
+</script>

@@ -15,7 +15,7 @@ namespace AnalysisChampionship.Controllers
         IAnaliseService service;
         public HomeController()
         {
-            service = new AnaliseServiceMod2();
+            service = new AnaliseService();
         }
         public ActionResult Index(int timeCasaID = 0, int timeForaID = 0, int campeonatoID = 0)
         {
@@ -26,6 +26,17 @@ namespace AnalysisChampionship.Controllers
             }
             else
                 analise = new Analise(new AnaliseTime(), new AnaliseTime());
+            return View(analise);
+        }
+        public ActionResult NBA(int timeCasaID = 0, int timeForaID = 0)
+        {
+            AnaliseNBA analise;
+            if (timeCasaID > 0 && timeForaID > 0)
+            {
+                analise = new AnaliseNBAService().GetAnalise(timeCasaID, timeForaID);
+            }
+            else
+                analise = new AnaliseNBA(new AnaliseTimeNBA(), new AnaliseTimeNBA());
             return View(analise);
         }
 

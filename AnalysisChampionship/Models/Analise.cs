@@ -14,168 +14,7 @@ namespace AnalysisChampionship.Models
         }
         public AnaliseTime Mandante { get; set; }
         public AnaliseTime Visitante { get; set; }
-
-        public int PercentualVitoriaCasa => GetResultado(enumTipoCalculo.VitoriaCasa);
-        public int PercentualEmpate => GetResultado(enumTipoCalculo.Empate);
-        public int PercentualVitoriaFora => GetResultado(enumTipoCalculo.VitoriaFora);
-        public int PercentualVitoriaEmpateCasa => GetResultado(enumTipoCalculo.VitoriaEmpateCasa);
-        public int PercentualVitoriaEmpateFora => GetResultado(enumTipoCalculo.VitoriaEmpateFora);
-        public int PercentualVitoriaCasaFora => GetResultado(enumTipoCalculo.VitoriaCasaFora);
-        public int PercentualOver15 => GetResultado(enumTipoCalculo.Over15);
-        public int PercentualOver25 => GetResultado(enumTipoCalculo.Over25);
-        public int PercentualUnder25 => GetResultado(enumTipoCalculo.Under25);
-        public int PercentualUnder35 => GetResultado(enumTipoCalculo.Under35);
-        public int PercentualAmbas => GetResultado(enumTipoCalculo.Ambas);
-
-        private int GetResultado(enumTipoCalculo tipoCalculo)
-        {
-            enumTipoResultado typeMandante, typeVisitante;
-
-            switch (tipoCalculo)
-            {
-                case enumTipoCalculo.VitoriaCasa:
-                    typeMandante = enumTipoResultado.Vitoria;
-                    typeVisitante = enumTipoResultado.Derrota;
-                    break;
-
-                case enumTipoCalculo.VitoriaFora:
-                    typeMandante = enumTipoResultado.Derrota;
-                    typeVisitante = enumTipoResultado.Vitoria;
-                    break;
-
-                case enumTipoCalculo.Empate:
-                    typeMandante = typeVisitante = enumTipoResultado.Empate;
-                    break;
-
-                case enumTipoCalculo.VitoriaEmpateCasa:
-                    typeMandante = enumTipoResultado.VitoriaEmpate;
-                    typeVisitante = enumTipoResultado.DerrotaEmpate;
-                    break;
-
-                case enumTipoCalculo.VitoriaEmpateFora:
-                    typeMandante = enumTipoResultado.DerrotaEmpate;
-                    typeVisitante = enumTipoResultado.VitoriaEmpate;
-                    break;
-
-                case enumTipoCalculo.VitoriaCasaFora:
-                    typeMandante = enumTipoResultado.VitoriaDerrota;
-                    typeVisitante = enumTipoResultado.VitoriaDerrota;
-                    break;
-
-                case enumTipoCalculo.Over15:
-                    typeMandante = enumTipoResultado.Over15;
-                    typeVisitante = enumTipoResultado.Over15;
-                    break;
-
-                case enumTipoCalculo.Over25:
-                    typeMandante = enumTipoResultado.Over25;
-                    typeVisitante = enumTipoResultado.Over25;
-                    break;
-
-                case enumTipoCalculo.Under25:
-                    typeMandante = enumTipoResultado.Under25;
-                    typeVisitante = enumTipoResultado.Under25;
-                    break;
-
-                case enumTipoCalculo.Under35:
-                    typeMandante = enumTipoResultado.Under35;
-                    typeVisitante = enumTipoResultado.Under35;
-                    break;
-
-                default:
-                    typeMandante = enumTipoResultado.Ambas;
-                    typeVisitante = enumTipoResultado.Ambas;
-                    break;
-            }
-
-            decimal resultado = 0, contador = 0;
-            GetResultado(Mandante, typeMandante, ref resultado, ref contador);
-            GetResultado(Visitante, typeVisitante, ref resultado, ref contador);
-            return Convert.ToInt32((resultado / contador) * 100);
-        }
-
-        private void GetResultado(AnaliseTime time, enumTipoResultado type, ref decimal resultado, ref decimal contador)
-        {
-            GetResultado(time.Global, type, ref resultado, ref contador);
-            GetResultado(time.ComMando, type, ref resultado, ref contador);
-            GetResultado(time.Ultimos10, type, ref resultado, ref contador);
-            GetResultado(time.Ultimos10ComMando, type, ref resultado, ref contador);
-            GetResultado(time.Ultimos5, type, ref resultado, ref contador);
-            GetResultado(time.Ultimos5ComMando, type, ref resultado, ref contador);
-            GetResultado(time.Similares, type, ref resultado, ref contador);
-            GetResultado(time.SimilaresComMando, type, ref resultado, ref contador);
-        }
-
-        private void GetResultado(AnaliseTimeDetalhe time, enumTipoResultado type, ref decimal resultado, ref decimal contador)
-        {
-            if (time.Partidas > 0)
-            {
-                contador++;
-                switch (type)
-                {
-                    case enumTipoResultado.Vitoria:
-                        resultado += GetResultado(time.PercentualVitoria, 50, 30);
-                        break;
-                    case enumTipoResultado.Empate:
-                        resultado += GetResultado(time.PercentualEmpate, 50, 30);
-                        break;
-                    case enumTipoResultado.Derrota:
-                        resultado += GetResultado(time.PercentualDerrota, 50, 30);
-                        break;
-                    case enumTipoResultado.VitoriaEmpate:
-                        resultado += GetResultado(time.PercentualVitoriaEmpate, 70, 50);
-                        break;
-                    case enumTipoResultado.DerrotaEmpate:
-                        resultado += GetResultado(time.PercentualDerrotaEmpate, 70, 50);
-                        break;
-                    case enumTipoResultado.VitoriaDerrota:
-                        resultado += GetResultado(time.PercentualVitoriaOuDerrota, 70, 50);
-                        break;
-                    case enumTipoResultado.Over15:
-                        resultado += GetResultado(time.PercentualOver15, 70, 50);
-                        break;
-                    case enumTipoResultado.Over25:
-                        resultado += GetResultado(time.PercentualOver25, 70, 50);
-                        break;
-                    case enumTipoResultado.Under25:
-                        resultado += GetResultado(time.PercentualUnder25, 70, 50);
-                        break;
-                    case enumTipoResultado.Under35:
-                        resultado += GetResultado(time.PercentualUnder35, 70, 50);
-                        break;
-                    case enumTipoResultado.Ambas:
-                        resultado += GetResultado(time.PercentualAmbas, 60, 40);
-                        break;
-                }
-            }
-        }
-
-        private decimal GetResultado(decimal value, int percentualPositivo, int percentualNegativo)
-        {
-            if (value >= percentualPositivo)
-                return 1;
-            else if (value <= percentualNegativo)
-                return -1;
-            else
-                return 0;
-        }
-
-        public decimal VitoriaCasa { get; set; }
-        public decimal VitoriaEmpateCasa { get; set; }
-        public decimal Empate { get; set; }
-        public decimal VitoriaFora { get; set; }
-        public decimal VitoriaEmpateFora { get; set; }
-
-        public decimal VitoriaCasaOuFora { get; set; }
-
-        public decimal Over15 { get; set; }
-        public decimal Over25 { get; set; }
-        public decimal Under25 { get; set; }
-        public decimal Under35 { get; set; }
-        public decimal Ambas { get; set; }
-
-        public string Insight { get; set; }
-
+        
         public string GetTextoResultadoExato(enumTipoAnalise tipoAnalise)
         {
             bool isGreen = false;
@@ -283,7 +122,9 @@ namespace AnalysisChampionship.Models
             decimal empate = (mandante.PercentualEmpate + visitante.PercentualEmpate) / 2;
             decimal vitoriaFora = (mandante.PercentualDerrota + visitante.PercentualVitoria) / 2;
 
-            if (vitoriaCasa >= 50 || empate >= 50 || vitoriaFora >= 50)
+            if ((vitoriaCasa >= 50 && mandante.PercentualVitoria >=50) || 
+                (empate >= 50 && mandante.PercentualEmpate >= 50 && visitante.PercentualEmpate >= 50) || 
+                (vitoriaFora >= 50 && visitante.PercentualVitoria >= 50))
                 isGreen = true;
 
             return $"A média final de vitória do {Mandante.Nome} é de {vitoriaCasa}%. Para empate a média é de {empate}% enquanto a média de vitórias para {Visitante.Nome} é de {vitoriaFora}%";
@@ -296,17 +137,18 @@ namespace AnalysisChampionship.Models
             if (mandante.Partidas == 0 || visitante.Partidas == 0)
                 return "N/A";
 
-            decimal mediaOver = (mandante.PercentualOver25 + visitante.PercentualOver25) / 2;
-            decimal mediaUnder = (mandante.PercentualUnder25 + visitante.PercentualUnder25) / 2;
-
-            if (mediaOver >= 70 || mediaUnder >= 70)
+            decimal mediaOver25 = (mandante.PercentualOver25 + visitante.PercentualOver25) / 2;
+            decimal mediaUnder25 = (mandante.PercentualUnder25 + visitante.PercentualUnder25) / 2;
+            
+            if ((mediaOver25 >= 70 && mandante.PercentualOver25 >= 50 && visitante.PercentualOver25 >= 50) 
+                || (mediaUnder25 >= 70 && mandante.PercentualUnder25 >= 50 && visitante.PercentualUnder25 >=50))
                 isGreen = true;
 
-            if (mediaOver > mediaUnder)
-                return $"Over {mediaOver}%";
+            if (mediaOver25 > mediaUnder25)
+                return $"Over {mediaOver25}%";
 
-            if (mediaUnder > mediaOver)
-                return $"Under {mediaUnder}%";
+            if (mediaUnder25 > mediaOver25)
+                return $"Under {mediaUnder25}%";
 
             return $"Neutro";
         }
@@ -318,7 +160,7 @@ namespace AnalysisChampionship.Models
                 return "N/A";
 
             decimal mediaAmbas = (mandante.PercentualAmbas + visitante.PercentualAmbas) / 2;
-            if (mediaAmbas > 60)
+            if (mediaAmbas > 60 && mandante.PercentualAmbas >=50 && visitante.PercentualAmbas >= 50)
                 isGreen = true;
 
             return $"Ambas marcam {mediaAmbas}%";

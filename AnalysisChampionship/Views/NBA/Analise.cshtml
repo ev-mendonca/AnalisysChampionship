@@ -1,0 +1,26 @@
+﻿@model List<AnalysisChampionship.Models.TimeNBA>
+
+@using (Html.BeginForm("NBA", "Home", FormMethod.Get))
+{
+    <div class="form-group">
+        <select name="TimeCasaID" autofocus>
+            @foreach (var item in Model)
+            {
+                <option value="@item.ID">@item.Nome</option>
+
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <select name="TimeForaID">
+            @foreach (var item in Model)
+            {
+                <option value="@item.ID">@item.Nome</option>
+
+            }
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary btn-user btn-block" value="Salvar" />
+}
+
+

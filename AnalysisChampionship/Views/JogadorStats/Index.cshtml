@@ -1,0 +1,49 @@
+﻿@model List<AnalysisChampionship.Models.JogadorStats>
+<fieldset class="border p-2">
+    <div class="row mb-2">
+        <h1 class="h3 mb-2 text-gray-800 col-md-11">Jogador Stats</h1>
+        <a href="/JogadorStats/Editar/?JogadorID=@(TempData["JogadorID"] as int?)" class="btn btn-primary btn-icon-split">
+            <span class="text">Novo</span>
+        </a>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Jogador</th>
+                            <th>Pontos</th>
+                            <th>Rebotes</th>
+                            <th>Assitencias</th>
+                            <th>Tres</th>
+                            <th>Roubos</th>
+                            <th>Tocos</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var stats in Model)
+                        {
+                            <tr>
+                                <td>@stats.Jogador.Nome</td>
+                                <td>@stats.Pontos</td>
+                                <td>@stats.Rebotes</td>
+                                <td>@stats.Assistencia</td>
+                                <td>@stats.Tres</td>
+                                <td>@stats.Roubo</td>
+                                <td>@stats.Toco</td>
+                                <td>
+                                    <a href="/JogadorStats/Deletar/@stats.ID?jogadorID=@stats.JogadorID" class="btn btn-primary btn-icon-split">
+                                        <span class="text">Deletar</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</fieldset>

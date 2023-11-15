@@ -1,0 +1,33 @@
+﻿@model AnalysisChampionship.Models.JogadorStats
+
+@using (Html.BeginForm("Salvar", "JogadorStats", FormMethod.Post))
+{
+<div class="form-group">
+    <select name="JogadorID">
+        @foreach (var item in ViewData["Jogadores"] as List<AnalysisChampionship.Models.Jogador>)
+        {
+            <option @(item.ID == Model.JogadorID ? "selected" : "") value="@item.ID">@item.Nome</option>
+
+        }
+    </select>
+</div>
+    <div class="form-group">
+        <input type="text" name="Pontos" placeholder="Pontos" autofocus />
+    </div>
+    <div class="form-group">
+        <input type="text" name="Rebotes" placeholder="Rebotes" />
+    </div>
+    <div class="form-group">
+        <input type="text" name="Assistencia" placeholder="Assistencias" />
+    </div>
+    <div class="form-group">
+        <input type="text" name="Tres" placeholder="Tres" />
+    </div>
+    <div class="form-group">
+        <input type="text" name="Roubo" placeholder="Roubos" />
+    </div>
+    <div class="form-group">
+        <input type="text" name="Toco" placeholder="Tocos" />
+    </div>
+    <input type="submit" class="btn btn-primary btn-user btn-block" value="Salvar" />
+}

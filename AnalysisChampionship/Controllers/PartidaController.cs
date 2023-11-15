@@ -9,13 +9,17 @@ namespace AnalysisChampionship.Controllers
     public class PartidaController : Controller
     {
         private readonly PartidaRepository _repository;
+        private readonly PartidaNBARepository _NBARepository;
         private readonly TimeRepository _timeRepository;
+        private readonly TimeNBARepository _timeNBARepository;
         private readonly CampeonatoRepository _campeonatoRepository;
         public PartidaController()
         {
             _repository = new PartidaRepository();
             _timeRepository = new TimeRepository();
             _campeonatoRepository = new CampeonatoRepository();
+            _NBARepository = new PartidaNBARepository();
+            _timeNBARepository = new TimeNBARepository();
         }
         public ActionResult Editar(int id)
         {
@@ -24,6 +28,13 @@ namespace AnalysisChampionship.Controllers
             {
                 CampeonatoID = id,
             };
+            return View(model);
+        }
+
+        public ActionResult EditarNBA()
+        {
+            ViewData["Times"] = _timeNBARepository.Get();
+            PartidaNBA model = new PartidaNBA();
             return View(model);
         }
 
@@ -42,7 +53,14 @@ namespace AnalysisChampionship.Controllers
             _repository.Insert(partida);
             return RedirectToAction("Editar", "Partida", new { id = partida.CampeonatoID });
         }
-        
+
+        [HttpPost]
+        public ActionResult SalvarNBA(PartidaNBA partida)
+        {
+            _NBARepository.Insert(partida);
+            return RedirectToAction("EditarNBA", "Partida");
+        }
+
         [HttpPost]
         public ActionResult SalvarVarios(string partidas, int campeonatoID)
         {
@@ -70,6 +88,13 @@ namespace AnalysisChampionship.Controllers
         {
             _repository.Deletar(id);
             return RedirectToAction("Partidas", "Campeonato", new { id = campeonatoId });
+        }
+
+        [HttpGet]
+        public ActionResult DeletarNBA(int id, int campeonatoId)
+        {
+            _NBARepository.Deletar(id);
+            return RedirectToAction("Index", "NBA");
         }
     }
 }
